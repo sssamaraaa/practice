@@ -1,1 +1,6 @@
 venv/
+__pycache__
+
+lesson2/data/
+lesson2/models/
+lesson2/plots/
