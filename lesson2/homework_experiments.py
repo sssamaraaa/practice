@@ -6,13 +6,23 @@ from homework_model_modification import LinearRegression, LogisticRegression, Me
 
 
 # =============================================== Задание 3: Эксперименты и анализ ===============================================
-# 3.1
-# для задания 3.2
+# 3.1 - 3.2
 def titanic_features(df):
     df = df.copy()
 
     # категориальные
+    df["Sex"] = df["Sex"].map({"male": 0, "female": 1})
 
+    df["FamilySize"] = df["SibSp"] + df["Parch"]
+    df["IsAlone"] = (df["FamilySize"] == 0).astype(int)
+
+    df["Age_Fare"] = df["Age"] * df["Fare"]
+    df["Age_Class"] = df["Age"] * df["Pclass"]
+    df["Fare_Class"] = df["Fare"] * df["Pclass"]
+
+    # полиномиальные
+    df["Age_sq"] = df["Age"] ** 2
+    df["Fare_log"] = np.log1p(df["Fare"])
 
     # статистические
     df["mean_fare_by_sex"] = df.groupby("Sex")["Fare"].transform("mean")
@@ -117,6 +127,3 @@ print("Confusion matrix:")
 print(cm)
 
 Metrics.plot_confusion_matrix(all_targets, all_probs)
-
-
-# 3.2
