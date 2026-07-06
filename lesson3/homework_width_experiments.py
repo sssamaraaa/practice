@@ -4,11 +4,11 @@ import pandas as pd
 import itertools
 import time
 
-from model import FullyConnectedModel
-from lesson3.trainer import train_model
-from datasets import get_cifar_loaders, get_mnist_loaders
-from utils.visualization_utils import plot_heatmap
-from utils.experiment_utils import build_architecture, build_config
+from lesson3.model import FullyConnectedModel
+from base.trainer import train_model
+from base.datasets import get_cifar_loaders, get_mnist_loaders
+from lesson3.utils.visualization_utils import plot_heatmap
+from lesson3.utils.experiment_utils import build_architecture, build_config
 
 
 def grid_search(train_loader, test_loader, device, epochs=5, lr=0.001):

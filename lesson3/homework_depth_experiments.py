@@ -1,10 +1,10 @@
 import torch
 import time
 import numpy as np
-from model import FullyConnectedModel
-from utils.visualization_utils import plot_training_curve, plot_weights_distributions
-from lesson3.trainer import train_model
-from datasets import get_cifar_loaders, get_mnist_loaders
+from lesson3.model import FullyConnectedModel
+from lesson3.utils.visualization_utils import plot_training_curve, plot_weights_distributions
+from base.trainer import train_model
+from base.datasets import get_cifar_loaders, get_mnist_loaders
 
 
 if __name__ == "__main__":
