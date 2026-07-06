@@ -4,3 +4,11 @@ __pycache__
 lesson2/data/
 lesson2/models/
 lesson2/plots/
+
+lesson3/model_configs/
+lesson3/results/width_experiments/plots_cifar/grid_search_cifar_results.csv
+lesson3/results/width_experiments/plots_mnist/grid_search_mnist_results.csv
+lesson3/results/regularization_experiments/plots_cifar/accs
+lesson3/results/regularization_experiments/plots_cifar/losses
+lesson3/results/regularization_experiments/plots_mnist/accs
+lesson3/results/regularization_experiments/plots_mnist/losses
