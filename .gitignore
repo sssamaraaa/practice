@@ -13,3 +13,6 @@ lesson3/results/regularization_experiments/plots_cifar/accs
 lesson3/results/regularization_experiments/plots_cifar/losses
 lesson3/results/regularization_experiments/plots_mnist/accs
 lesson3/results/regularization_experiments/plots_mnist/losses
+
+lesson5/results/task6/resnet18.pth
+lesson5/results/task6/metrics.txt
