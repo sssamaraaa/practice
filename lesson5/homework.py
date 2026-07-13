@@ -331,14 +331,14 @@ def task_six(save_dir, exp_name):
         transforms.ToTensor()
     ])
 
-    test_transform = transforms.Compose([
+    val_transform = transforms.Compose([
         transforms.ToTensor()
     ])
 
     train_dataset = CustomImageDataset("data/train", transform=train_transform)
-    test_dataset = CustomImageDataset("data/test", transform=test_transform)
+    val_dataset = CustomImageDataset("data/test", transform=val_transform)
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
 
     model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
     model.fc = nn.Linear(model.fc.in_features, len(train_dataset.get_class_names()))
@@ -347,7 +347,7 @@ def task_six(save_dir, exp_name):
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
     epochs = 10
 
-    history = {"train_losses": [], "test_losses": [], "train_accs": [],"test_accs": []}
+    history = {"train_losses": [], "val_losses": [], "train_accs": [],"val_accs": []}
 
     for epoch in range(epochs):
         model.train()
@@ -376,7 +376,7 @@ def task_six(save_dir, exp_name):
         total = 0
 
         with torch.no_grad():
-            for images, labels in test_loader:
+            for images, labels in val_loader:
                 images = images.to(device)
                 labels = labels.to(device)
                 outputs = model(images)
@@ -386,12 +386,12 @@ def task_six(save_dir, exp_name):
                 correct += (preds == labels).sum().item()
                 total += labels.size(0)
 
-        val_loss /= len(test_loader)
+        val_loss /= len(val_loader)
         val_acc = correct / total
         history["train_losses"].append(train_loss)
-        history["test_losses"].append(val_loss)
+        history["val_losses"].append(val_loss)
         history["train_accs"].append(train_acc)
-        history["test_accs"].append(val_acc)
+        history["val_accs"].append(val_acc)
 
         print(
             f"Epoch {epoch+1}/{epochs} | "
@@ -406,9 +406,9 @@ def task_six(save_dir, exp_name):
 
     with open(os.path.join(save_path, "metrics.txt"), "w") as f:
         f.write(f"Train Accuracy: {history['train_accs'][-1]:.4f}\n")
-        f.write(f"Validation Accuracy: {history['test_accs'][-1]:.4f}\n")
+        f.write(f"Validation Accuracy: {history['val_accs'][-1]:.4f}\n")
         f.write(f"Train Loss: {history['train_losses'][-1]:.4f}\n")
-        f.write(f"Validation Loss: {history['test_losses'][-1]:.4f}\n")
+        f.write(f"Validation Loss: {history['val_losses'][-1]:.4f}\n")
 
 
 if __name__ == "__main__":
