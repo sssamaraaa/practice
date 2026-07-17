@@ -16,3 +16,6 @@ lesson3/results/regularization_experiments/plots_mnist/losses
 
 lesson5/results/task6/resnet18.pth
 lesson5/results/task6/metrics.txt
+
+lesson6/checkpoints
+lesson6/mistral_tokenizer.json
